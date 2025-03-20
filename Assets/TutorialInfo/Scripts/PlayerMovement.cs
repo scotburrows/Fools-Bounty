@@ -6,14 +6,16 @@ public class PlayerMovement : MonoBehaviour
 
     public CharacterController characterController;
     float moveSpeed = 10f;
-    int stamina = 300;
+    int stamina = 1000;
     Boolean canSprint = true;
     public static Boolean crouching = false;
 
     float fallSpeed = -10f;
     Vector3 gravity;
     public LayerMask ground;
+    public LayerMask water;
     Boolean onGround = false;
+    Boolean inWater = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -33,11 +35,11 @@ public class PlayerMovement : MonoBehaviour
             moveSpeed = 10f;
             stamina++;
         }
-        stamina = Mathf.Clamp(stamina, 0, 300);
+        stamina = Mathf.Clamp(stamina, 0, 1000);
         if (stamina <= 5) {
             canSprint = false;
         }
-        else if (stamina >= 295 && !crouching) {
+        else if (stamina >= 995 && !crouching) {
             canSprint = true;
         }
 
@@ -53,6 +55,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         onGround = Physics.CheckSphere(new Vector3(transform.position.x, transform.position.y - 1.5f, transform.position.z), 0.5f, ground);
+        inWater = Physics.CheckSphere(new Vector3(transform.position.x, transform.position.y, transform.position.z), 0.2f, water);
 
         // Movement with WASD
         Vector3 movement = (Input.GetAxisRaw("Horizontal") * transform.right) + (Input.GetAxisRaw("Vertical") * transform.forward);
@@ -61,6 +64,10 @@ public class PlayerMovement : MonoBehaviour
         // Ground check
         if (onGround && gravity.y < 0) {
             fallSpeed = -1f;
+        }
+        else if (inWater) {
+            fallSpeed = 0;
+            gravity.y = 0;
         }
         else {
             fallSpeed = -10f;
