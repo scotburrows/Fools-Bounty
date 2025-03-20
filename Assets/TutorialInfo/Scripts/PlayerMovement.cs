@@ -12,6 +12,8 @@ public class PlayerMovement : MonoBehaviour
 
     float fallSpeed = -10f;
     Vector3 gravity;
+    public LayerMask ground;
+    Boolean onGround = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -50,14 +52,14 @@ public class PlayerMovement : MonoBehaviour
             moveSpeed = 5f;
         }
 
-        //onGround = Physics.CheckSphere(new Vector3(transform.position.x, transform.position.y - characterController.isGrounded))
+        onGround = Physics.CheckSphere(new Vector3(transform.position.x, transform.position.y - 1.5f, transform.position.z), 0.5f, ground);
 
         // Movement with WASD
         Vector3 movement = (Input.GetAxisRaw("Horizontal") * transform.right) + (Input.GetAxisRaw("Vertical") * transform.forward);
         characterController.Move(movement * Time.deltaTime * moveSpeed);
 
         // Ground check
-        if (characterController.isGrounded) {
+        if (onGround && gravity.y < 0) {
             fallSpeed = -1f;
         }
         else {
@@ -68,10 +70,10 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             characterController.Move(new Vector3(0.001f, 0, 0));
-            if (characterController.isGrounded)
+            if (onGround)
             {
-                //fallSpeed = 100f;
-                characterController.Move(new Vector3(0, 10, 0));
+                gravity.y = 10f;
+                //characterController.Move(new Vector3(0, 10, 0));
             }
         }
 

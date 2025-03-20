@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 134990814}
   - component: {fileID: 134990813}
   - component: {fileID: 134990812}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -316,7 +316,7 @@ Transform:
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.02, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -732,6 +732,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterController: {fileID: 1052106356}
+  ground:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!1 &1303259214
 GameObject:
   m_ObjectHideFlags: 0
@@ -743,7 +746,7 @@ GameObject:
   - component: {fileID: 1303259217}
   - component: {fileID: 1303259216}
   - component: {fileID: 1303259215}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Terrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -837,7 +840,7 @@ GameObject:
   - component: {fileID: 1364925829}
   - component: {fileID: 1364925828}
   - component: {fileID: 1364925827}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -946,7 +949,7 @@ GameObject:
   - component: {fileID: 1440831959}
   - component: {fileID: 1440831958}
   - component: {fileID: 1440831957}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Plane (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1055,7 +1058,7 @@ GameObject:
   - component: {fileID: 2054112352}
   - component: {fileID: 2054112351}
   - component: {fileID: 2054112350}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: TestCube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
