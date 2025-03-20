@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask water;
     Boolean onGround = false;
     Boolean inWater = false;
+    int swim = 0;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -68,6 +69,7 @@ public class PlayerMovement : MonoBehaviour
         else if (inWater) {
             fallSpeed = 0;
             gravity.y = 0;
+            //characterController.Move(new Vector3(0, (float) Math.Sinh(swim++ * 0.01 * Time.deltaTime), 0) * 0.5f);
         }
         else {
             fallSpeed = -10f;
@@ -77,7 +79,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             characterController.Move(new Vector3(0.001f, 0, 0));
-            if (onGround)
+            if (onGround || inWater)
             {
                 gravity.y = 10f;
                 //characterController.Move(new Vector3(0, 10, 0));
