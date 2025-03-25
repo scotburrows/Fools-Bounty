@@ -13,13 +13,13 @@ public class GhostMonster : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        Animator animatorReference = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (GetComponentInChildren<Animator>().speed == 1)
+        if (animatorReference.speed == 1)
         {
             if (Physics.CheckSphere(transform.position, 10, targetLayer)) {
                 spotted_player = true;
@@ -40,7 +40,7 @@ public class GhostMonster : MonoBehaviour
             hit_timer--;
             if (hit_timer == 0)
             {
-                GetComponentInChildren<Animator>().speed = 1;
+                animatorReference.speed = 1;
                 hit_timer = 200;
             }
         }
