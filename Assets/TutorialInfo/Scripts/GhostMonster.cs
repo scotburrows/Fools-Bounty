@@ -9,11 +9,12 @@ public class GhostMonster : MonoBehaviour
     int hit_timer = 200;
     public LayerMask targetLayer;
     public Transform target;
+    Animator animatorReference;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        Animator animatorReference = GetComponentInChildren<Animator>();
+        animatorReference = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
