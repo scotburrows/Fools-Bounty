@@ -500,7 +500,7 @@ GameObject:
   - component: {fileID: 336944526}
   - component: {fileID: 336944525}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Coins
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5807,7 +5807,7 @@ GameObject:
   - component: {fileID: 595416353}
   - component: {fileID: 595416354}
   m_Layer: 5
-  m_Name: Slider
+  m_Name: Stamina
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5822,7 +5822,7 @@ RectTransform:
   m_GameObject: {fileID: 595416352}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.0967, y: 1.9839, z: 1}
+  m_LocalScale: {x: 2.0967, y: 2.3364391, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 758588174}
@@ -6474,7 +6474,7 @@ GameObject:
   - component: {fileID: 890931061}
   - component: {fileID: 890931060}
   m_Layer: 5
-  m_Name: Text (TMP) (1)
+  m_Name: Health
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
