@@ -545,7 +545,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Coins:'
+  m_text: 'Doubloons: 0'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -610,7 +610,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: -66.81265, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -5831,7 +5831,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -120}
+  m_AnchoredPosition: {x: 0, y: -98}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &595416354
@@ -6519,7 +6519,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Health:'
+  m_text: 'Vitals: 100%'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6528,8 +6528,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4288484351
-  m_fontColor: {r: 1, g: 0.0745098, b: 0.6144176, a: 1}
+    rgba: 4282848255
+  m_fontColor: {r: 1, g: 0.0745098, b: 0.2788421, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -6584,7 +6584,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: -13.850113, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -7077,6 +7077,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterController: {fileID: 1052106356}
   stamina: 1000
+  canSprint: 1
   ground:
     serializedVersion: 2
     m_Bits: 584
@@ -8464,6 +8465,7 @@ GameObject:
   - component: {fileID: 1453907670}
   - component: {fileID: 1453907669}
   - component: {fileID: 1453907673}
+  - component: {fileID: 1453907674}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -8570,6 +8572,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slider: {fileID: 595416354}
   player: {fileID: 1052106358}
+  sliderFill: {fileID: 953807016}
+--- !u!114 &1453907674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1453907668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5eb33639fc659e34a9a65f1e7cc403ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: {fileID: 890931060}
+  coins: {fileID: 336944525}
+  stats: {fileID: 0}
 --- !u!1 &1483843053
 GameObject:
   m_ObjectHideFlags: 0
@@ -8968,6 +8986,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   collected: {fileID: 435179784}
+  stats: {fileID: 1052106359}
+  coinAmount: 20
 --- !u!1 &1700313641
 GameObject:
   m_ObjectHideFlags: 0
@@ -9046,6 +9066,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   collected: {fileID: 435179784}
+  stats: {fileID: 1052106359}
+  coinAmount: 10
 --- !u!1001 &1764931698
 PrefabInstance:
   m_ObjectHideFlags: 0

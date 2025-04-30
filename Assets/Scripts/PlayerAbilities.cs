@@ -16,6 +16,9 @@ public class PlayerAbilities : MonoBehaviour
     public LayerMask treasure;
     public LayerMask monster;
 
+    public static int health = 100;
+    public static int coins = 0;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
