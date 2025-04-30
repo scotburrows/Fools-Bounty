@@ -6,7 +6,7 @@ public class PlayerMovement : MonoBehaviour
 
     public CharacterController characterController;
     float moveSpeed = 10f;
-    public int stamina = 1000;
+    public int stamina = 400;
     public Boolean canSprint = true;
     public static Boolean crouching = false;
 
@@ -18,6 +18,8 @@ public class PlayerMovement : MonoBehaviour
     Boolean inWater = false;
     int swim = 0;
 
+    public static Boolean haste = false;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -28,6 +30,11 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         // Sprinting & stamina management
+        if (haste)
+        {
+            moveSpeed = 30f;
+            stamina++;
+        }
         if (Input.GetKey(KeyCode.LeftShift) && canSprint) {
             moveSpeed = 20f;
             stamina--;
@@ -36,11 +43,11 @@ public class PlayerMovement : MonoBehaviour
             moveSpeed = 10f;
             stamina++;
         }
-        stamina = Mathf.Clamp(stamina, 0, 1000);
-        if (stamina <= 5) {
+        stamina = Mathf.Clamp(stamina, 0, 400);
+        if (stamina <= 1) {
             canSprint = false;
         }
-        else if (stamina >= 995 && !crouching) {
+        else if (stamina >= 190 && !crouching) {
             canSprint = true;
         }
 

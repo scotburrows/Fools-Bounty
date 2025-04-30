@@ -18,7 +18,11 @@ public class StaminaBar : MonoBehaviour
     void Update()
     {
         slider.value = player.stamina;
-        if (player.canSprint)
+        if (PlayerMovement.haste)
+        {
+            sliderFill.color = new Color(249 / 255f, 213 / 255f, 63 / 255f);
+        }
+        else if (player.canSprint)
         {
             sliderFill.color = new Color(63 / 255f, 131 / 255f, 249 / 255f);
         }

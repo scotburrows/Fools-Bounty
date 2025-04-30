@@ -5879,9 +5879,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1000
+  m_MaxValue: 400
   m_WholeNumbers: 0
-  m_Value: 1000
+  m_Value: 400
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -8587,7 +8587,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: {fileID: 890931060}
   coins: {fileID: 336944525}
-  stats: {fileID: 0}
 --- !u!1 &1483843053
 GameObject:
   m_ObjectHideFlags: 0
@@ -8986,7 +8985,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   collected: {fileID: 435179784}
-  stats: {fileID: 1052106359}
   coinAmount: 20
 --- !u!1 &1700313641
 GameObject:
@@ -9066,7 +9064,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   collected: {fileID: 435179784}
-  stats: {fileID: 1052106359}
   coinAmount: 10
 --- !u!1001 &1764931698
 PrefabInstance:
