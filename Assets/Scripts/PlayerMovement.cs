@@ -6,7 +6,7 @@ public class PlayerMovement : MonoBehaviour
 
     public CharacterController characterController;
     float moveSpeed = 10f;
-    public int stamina = 400;
+    public static int stamina = 400;
     public Boolean canSprint = true;
     public static Boolean crouching = false;
 
@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     int swim = 0;
 
     public static Boolean haste = false;
+    public static float haste_time = 400f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -29,14 +30,24 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Sprinting & stamina management
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            haste = true;
+        }
+        // Haste ability
         if (haste)
         {
-            moveSpeed = 30f;
-            stamina++;
+            moveSpeed = 25f;
+            // stamina++;
+            haste_time -= (400 / 12) * Time.deltaTime;
+            if (haste_time <= 0) {
+                haste = false;
+                haste_time = 200f;
+            }
         }
-        if (Input.GetKey(KeyCode.LeftShift) && canSprint) {
-            moveSpeed = 20f;
+        // Sprinting & stamina management
+        else if (Input.GetKey(KeyCode.LeftShift) && canSprint) {
+            moveSpeed = 15f;
             stamina--;
         }
         else {

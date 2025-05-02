@@ -19,7 +19,7 @@ public class PlayerAbilities : MonoBehaviour
     public LayerMask potionShop;
 
     public static int health = 100;
-    public static int coins = 0;
+    public static int coins = 20;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -47,7 +47,7 @@ public class PlayerAbilities : MonoBehaviour
             playerSlot = 4;
         }
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.E))
         {
             Ray ray = new Ray(camera.transform.position, camera.transform.forward);
             RaycastHit hit;
@@ -70,11 +70,17 @@ public class PlayerAbilities : MonoBehaviour
                     slot2.GetComponent<Rigidbody>().useGravity = false;
                     slot2.Translate(new Vector3(0, -100, 0));
                 }
-                else if (slot2)
+                else if (slot2.GetComponent<Rigidbody>())
                 {
                     slot2.position = camera.transform.position + camera.transform.forward * 3;
                     slot2.rotation = camera.rotation;
                     slot2.GetComponent<Rigidbody>().useGravity = true;
+                    slot2 = null;
+                }
+                else
+                {
+                    PlayerMovement.haste = true;
+                    slot2.Translate(new Vector3(0, 100, 0));
                     slot2 = null;
                 }
             }
@@ -86,11 +92,17 @@ public class PlayerAbilities : MonoBehaviour
                     slot3.GetComponent<Rigidbody>().useGravity = false;
                     slot3.Translate(new Vector3(0, -100, 0));
                 }
-                else if (slot3)
+                else if (slot3.GetComponent<Rigidbody>())
                 {
                     slot3.position = camera.transform.position + camera.transform.forward * 3;
                     slot3.rotation = camera.rotation;
                     slot3.GetComponent<Rigidbody>().useGravity = true;
+                    slot3 = null;
+                }
+                else
+                {
+                    PlayerMovement.haste = true;
+                    slot3.Translate(new Vector3(0, 100, 0));
                     slot3 = null;
                 }
             }
@@ -102,11 +114,17 @@ public class PlayerAbilities : MonoBehaviour
                     slot4.GetComponent<Rigidbody>().useGravity = false;
                     slot4.Translate(new Vector3(0, -100, 0));
                 }
-                else if (slot4)
+                else if (slot4.GetComponent<Rigidbody>())
                 {
                     slot4.position = camera.transform.position + camera.transform.forward * 3;
                     slot4.rotation = camera.rotation;
                     slot4.GetComponent<Rigidbody>().useGravity = true;
+                    slot4 = null;
+                }
+                else
+                {
+                    PlayerMovement.haste = true;
+                    slot4.Translate(new Vector3(0, 100, 0));
                     slot4 = null;
                 }
             }
@@ -118,10 +136,41 @@ public class PlayerAbilities : MonoBehaviour
             RaycastHit hit;
             //Debug.DrawRay(camera.transform.position, camera.transform.forward * 50);
 
-            if (Physics.Raycast(ray, out hit, 10, ammoShop))
+            if (Physics.Raycast(ray, out hit, 5, ammoShop))
             {
                 bullets += 1;
                 coins -= 10;
+            }
+            if (Physics.Raycast(ray, out hit, 5, potionShop))
+            {
+                target = hit.transform;
+                if (playerSlot <= 2)
+                {
+                    if (!slot2)
+                    {
+                        slot2 = target.parent.GetComponent<PotionStand>().potion1;
+                        slot2.Translate(new Vector3(0, -100, 0));
+                        coins -= 15;
+                    }
+                }
+                else if (playerSlot == 3 || (slot2 && playerSlot <= 2))
+                {
+                    if (!slot3)
+                    {
+                        slot3 = target.parent.GetComponent<PotionStand>().potion2;
+                        slot3.Translate(new Vector3(0, -100, 0));
+                        coins -= 15;
+                    }
+                }
+                else
+                {
+                    if (!slot4)
+                    {
+                        slot4 = target.parent.GetComponent<PotionStand>().potion3;
+                        slot4.Translate(new Vector3(0, -100, 0));
+                        coins -= 15;
+                    }
+                }
             }
         }
 
