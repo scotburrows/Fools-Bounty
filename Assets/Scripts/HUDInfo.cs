@@ -6,6 +6,9 @@ public class HUDInfo : MonoBehaviour
 {
     public TextMeshProUGUI health;
     public TextMeshProUGUI coins;
+    public Image ammo1;
+    public Image ammo2;
+    public Image ammo3;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -18,5 +21,32 @@ public class HUDInfo : MonoBehaviour
     {
         health.text = "Vitals: " + PlayerAbilities.health.ToString() + "%";
         coins.text = "Doubloons: " + PlayerAbilities.coins.ToString();
+
+        if (PlayerAbilities.bullets >= 3)
+        {
+            ammo3.color = Color.white;
+        }
+        else
+        {
+            ammo3.color = new Color(0.5f, 0.5f, 0.5f);
+        }
+
+        if (PlayerAbilities.bullets >= 2)
+        {
+            ammo2.color = Color.white;
+        }
+        else
+        {
+            ammo2.color = new Color(0.5f, 0.5f, 0.5f);
+        }
+
+        if (PlayerAbilities.bullets >= 1)
+        {
+            ammo1.color = Color.white;
+        }
+        else
+        {
+            ammo1.color = new Color(0.5f, 0.5f, 0.5f);
+        }
     }
 }

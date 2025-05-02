@@ -15,6 +15,8 @@ public class PlayerAbilities : MonoBehaviour
     public Transform camera;
     public LayerMask treasure;
     public LayerMask monster;
+    public LayerMask ammoShop;
+    public LayerMask potionShop;
 
     public static int health = 100;
     public static int coins = 0;
@@ -107,6 +109,19 @@ public class PlayerAbilities : MonoBehaviour
                     slot4.GetComponent<Rigidbody>().useGravity = true;
                     slot4 = null;
                 }
+            }
+        }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            Ray ray = new Ray(camera.transform.position, camera.transform.forward);
+            RaycastHit hit;
+            //Debug.DrawRay(camera.transform.position, camera.transform.forward * 50);
+
+            if (Physics.Raycast(ray, out hit, 10, ammoShop))
+            {
+                bullets += 1;
+                coins -= 10;
             }
         }
 
