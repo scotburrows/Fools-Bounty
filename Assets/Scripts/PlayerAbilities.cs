@@ -9,9 +9,9 @@ public class PlayerAbilities : MonoBehaviour
     public static int playerSlot = 0;
     public static int bullets = 3;
     public Transform target;
-    public Transform slot2;
-    public Transform slot3;
-    public Transform slot4;
+    public static Transform slot2;
+    public static Transform slot3;
+    public static Transform slot4;
     public Transform camera;
     public LayerMask treasure;
     public LayerMask monster;
@@ -47,9 +47,9 @@ public class PlayerAbilities : MonoBehaviour
             playerSlot = 4;
         }
 
-        if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.E))
+        if (Input.GetMouseButtonDown(0))
         {
-            Ray ray = new Ray(camera.transform.position, camera.transform.forward);
+            Ray ray = new(camera.transform.position, camera.transform.forward);
             RaycastHit hit;
             //Debug.DrawRay(camera.transform.position, camera.transform.forward * 50);
 
