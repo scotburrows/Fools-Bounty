@@ -19,8 +19,8 @@ public class HUDInfo : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        health.text = "Vitals: " + PlayerAbilities.health.ToString() + "%";
-        coins.text = "Doubloons: " + PlayerAbilities.coins.ToString();
+        health.text = PlayerAbilities.health.ToString() + "%";
+        coins.text = PlayerAbilities.coins.ToString();
 
         if (PlayerAbilities.bullets >= 3)
         {
