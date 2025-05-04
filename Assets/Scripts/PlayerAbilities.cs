@@ -20,6 +20,7 @@ public class PlayerAbilities : MonoBehaviour
 
     public static int health = 100;
     public static int coins = 20;
+    public ParticleSystem shootParticle;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -55,6 +56,7 @@ public class PlayerAbilities : MonoBehaviour
 
             if (playerSlot == 1 && bullets > 0)
             {
+                Destroy(Instantiate(shootParticle.gameObject, camera.transform.position, camera.transform.rotation), 2.0f);
                 if (Physics.Raycast(ray, out hit, 25, monster))
                 {
                     target = hit.transform;
