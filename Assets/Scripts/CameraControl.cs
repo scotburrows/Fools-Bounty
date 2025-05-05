@@ -18,13 +18,14 @@ public class CameraControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        xMouse = Input.GetAxis("Mouse X") * Time.deltaTime * 750;
+        xMouse = Input.GetAxis("Mouse X") * 12.5f;
         yRot += xMouse;
-        xRot -= Input.GetAxisRaw("Mouse Y") * Time.deltaTime * 750;
+        xRot -= Input.GetAxisRaw("Mouse Y") * 12.5f;
 
         xRot = Mathf.Clamp(xRot, -90, 90);
 
-        transform.rotation = Quaternion.Euler(xRot, yRot, 0);
+        //transform.rotation = Quaternion.Euler(xRot, yRot, 0);
+        transform.localRotation = Quaternion.Euler(xRot, 0, 0);
         player.Rotate(Vector3.up * xMouse);
 
         if (Input.GetKeyDown(KeyCode.LeftControl)) {

@@ -46,19 +46,23 @@ public class PlayerMovement : MonoBehaviour
             }
         }
         // Sprinting & stamina management
-        else if (Input.GetKey(KeyCode.LeftShift) && canSprint) {
+        else if (Input.GetKey(KeyCode.LeftShift) && canSprint && (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))) {
             moveSpeed = 15f;
             stamina--;
         }
         else {
             moveSpeed = 10f;
+            if (UnityEngine.Random.Range(0f, 1f) >= 0.5f)
+            {
+                stamina++;
+            }
             stamina++;
         }
         stamina = Mathf.Clamp(stamina, 0, 400);
         if (stamina <= 1) {
             canSprint = false;
         }
-        else if (stamina >= 190 && !crouching) {
+        else if (stamina >= 395 && !crouching) {
             canSprint = true;
         }
 
@@ -74,20 +78,26 @@ public class PlayerMovement : MonoBehaviour
         }
 
         onGround = Physics.CheckSphere(new Vector3(transform.position.x, transform.position.y - 1.5f, transform.position.z), 0.5f, ground);
-        inWater = Physics.CheckSphere(new Vector3(transform.position.x, transform.position.y, transform.position.z), 0.2f, water);
+        inWater = Physics.CheckSphere(new Vector3(transform.position.x, transform.position.y, transform.position.z), 0.4f, water);
 
         // Movement with WASD
         Vector3 movement = (Input.GetAxisRaw("Horizontal") * transform.right) + (Input.GetAxisRaw("Vertical") * transform.forward);
         characterController.Move(movement * Time.deltaTime * moveSpeed);
 
         // Ground check
-        if (onGround && gravity.y < 0) {
+        if (onGround && gravity.y < 0)
+        {
             fallSpeed = -1f;
         }
-        else if (inWater) {
+        else if (inWater)
+        {
             fallSpeed = 0;
             gravity.y = 0;
-            //characterController.Move(new Vector3(0, (float) Math.Sinh(swim++ * 0.01 * Time.deltaTime), 0) * 0.5f);
+            if (UnityEngine.Random.Range(0f, 2f) >= 1.5f)
+            {
+                stamina--;
+            }
+            //characterController.Move(new Vector3(0, (float) Math.Sin(swim++ * 1f), 0) * 0.5f);
         }
         else {
             fallSpeed = -10f;

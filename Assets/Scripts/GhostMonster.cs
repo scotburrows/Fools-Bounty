@@ -34,6 +34,11 @@ public class GhostMonster : MonoBehaviour
             {
                 transform.position = Vector3.MoveTowards(transform.position, target.position, 3 * Time.deltaTime);
                 //transform.rotation = target.rotation + initial_rotation;
+                transform.rotation = Quaternion.LookRotation(target.position - transform.position);
+            }
+            if (Physics.CheckSphere(transform.position, 1, targetLayer) && UnityEngine.Random.Range(0f, 1f) > 0.5)
+            {
+                PlayerAbilities.health -= 1;
             }
         }
         else
