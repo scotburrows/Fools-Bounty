@@ -6,7 +6,7 @@ public class PlayerMovement : MonoBehaviour
 
     public CharacterController characterController;
     float moveSpeed = 10f;
-    public static int stamina = 400;
+    public static float stamina = 400;
     public Boolean canSprint = true;
     public static Boolean crouching = false;
 
@@ -48,15 +48,11 @@ public class PlayerMovement : MonoBehaviour
         // Sprinting & stamina management
         else if (Input.GetKey(KeyCode.LeftShift) && canSprint && (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))) {
             moveSpeed = 15f;
-            stamina--;
+            stamina -= 75 * Time.deltaTime;
         }
         else {
             moveSpeed = 10f;
-            if (UnityEngine.Random.Range(0f, 1f) >= 0.5f)
-            {
-                stamina++;
-            }
-            stamina++;
+            stamina += 100 * Time.deltaTime;
         }
         stamina = Mathf.Clamp(stamina, 0, 400);
         if (stamina <= 1) {
