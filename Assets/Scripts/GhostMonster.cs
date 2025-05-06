@@ -22,7 +22,7 @@ public class GhostMonster : MonoBehaviour
     {
         if (animatorReference.speed == 1)
         {
-            if (Physics.CheckSphere(transform.position, 10, targetLayer)) {
+            if ((Physics.CheckSphere(transform.position, 15, targetLayer) && !PlayerMovement.crouching) || (PlayerMovement.crouching && Physics.CheckSphere(transform.position, 10, targetLayer))) {
                 spotted_player = true;
             }
             else if (!Physics.CheckSphere(transform.position, 25, targetLayer))

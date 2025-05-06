@@ -28,7 +28,7 @@ public class SkeletonMonster : MonoBehaviour
     {
         if (animatorReference.speed == 1)
         {
-            if (Physics.CheckSphere(transform.position, 15, targetLayer)) {
+            if ((Physics.CheckSphere(transform.position, 15, targetLayer) && !PlayerMovement.crouching) || (PlayerMovement.crouching && Physics.CheckSphere(transform.position, 12, targetLayer))) {
                 spotted_player = true;
             }
             else if (!Physics.CheckSphere(transform.position, 25, targetLayer))
@@ -39,18 +39,22 @@ public class SkeletonMonster : MonoBehaviour
             if (spotted_player)
             {
                 //transform.position = Vector3.MoveTowards(transform.position, new Vector3(target.transform.position.x, transform.position.y, target.transform.position.z), 7 * Time.deltaTime);
-                characterController.Move((target.transform.position - transform.position) * 2 * Time.deltaTime);
+                characterController.Move((target.transform.position - transform.position).normalized * 10 * Time.deltaTime);
                 //transform.rotation = target.rotation + initial_rotation;
                 transform.rotation = Quaternion.LookRotation(target.position - transform.position);
-                animatorSpeed += Time.deltaTime;
-                animatorSpeed = Mathf.Clamp(animatorSpeed, 0f, 1f);
-                animatorReference.SetFloat("Speed", animatorSpeed);
-
+                animatorSpeed += 0.6f * Time.deltaTime;
+            }
+            else
+            {
+                animatorSpeed -= 0.6f * Time.deltaTime;
             }
             if (Physics.CheckSphere(transform.position, 1, targetLayer) && UnityEngine.Random.Range(0f, 1f) > 0.5)
             {
                 PlayerAbilities.health -= 1;
+                animatorSpeed -= 0.6f * Time.deltaTime;
             }
+            animatorSpeed = Mathf.Clamp(animatorSpeed, 0f, 1f);
+            animatorReference.SetFloat("Speed", animatorSpeed);
         }
         else
         {

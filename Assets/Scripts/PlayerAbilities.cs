@@ -60,7 +60,14 @@ public class PlayerAbilities : MonoBehaviour
                 if (Physics.Raycast(ray, out hit, 25, monster))
                 {
                     target = hit.transform;
-                    target.parent.GetComponentInChildren<Animator>().speed = 0.2f;
+                    if (target.parent)
+                    {
+                        target.parent.GetComponentInChildren<Animator>().speed = 0.2f;
+                    }
+                    else
+                    {
+                        target.GetComponentInChildren<Animator>().speed = 0.2f;
+                    }
                 }
                 bullets--;
             }

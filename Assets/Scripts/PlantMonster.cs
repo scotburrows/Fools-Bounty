@@ -28,7 +28,7 @@ public class PlantMonster : MonoBehaviour
     {
         if (animatorReference.speed == 1)
         {
-            if (Physics.CheckSphere(transform.position, 25, targetLayer)) {
+            if ((Physics.CheckSphere(transform.position, 25, targetLayer) && !PlayerMovement.crouching) || (PlayerMovement.crouching && Physics.CheckSphere(transform.position, 15, targetLayer))) {
                 spotted_player = true;
             }
             else if (!Physics.CheckSphere(transform.position, 25, targetLayer))
