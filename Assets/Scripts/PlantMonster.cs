@@ -79,7 +79,7 @@ public class PlantMonster : MonoBehaviour
                     {
                         attack2.transform.position = new Vector3(target.transform.position.x, transform.position.y - 1.5f, target.transform.position.z);
                         setPos = true;
-                        Debug.Log("c");
+                        //Debug.Log("c");
                     }
                     else if (attack2.transform.localPosition.y < 0 && !atTop)
                     {
@@ -118,7 +118,7 @@ public class PlantMonster : MonoBehaviour
                     attack2.Translate(Vector3.up * -4 * Time.deltaTime);
                 }
             }
-            if ((Physics.CheckSphere(attack1.position, 2, targetLayer) || Physics.CheckSphere(attack2.position, 2, targetLayer)) && UnityEngine.Random.Range(0f, 1f) > 0.85)
+            if ((Physics.CheckSphere(attack1.position, 2, targetLayer) || Physics.CheckSphere(attack2.position, 2, targetLayer)) && UnityEngine.Random.Range(0f, 1f) > 0.9)
             {
                 PlayerAbilities.health -= 1;
             }
