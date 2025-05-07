@@ -42,7 +42,7 @@ public class SkeletonMonster : MonoBehaviour
                 characterController.Move((target.transform.position - transform.position).normalized * 10 * Time.deltaTime);
                 //transform.rotation = target.rotation + initial_rotation;
                 transform.rotation = Quaternion.LookRotation(target.position - transform.position);
-                animatorSpeed += 0.6f * Time.deltaTime;
+                animatorSpeed += 0.8f * Time.deltaTime;
             }
             else
             {
