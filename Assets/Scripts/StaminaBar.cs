@@ -23,7 +23,7 @@ public class StaminaBar : MonoBehaviour
             sliderFill.color = new Color(249 / 255f, 213 / 255f, 63 / 255f);
             slider.value = PlayerMovement.haste_time;
         }
-        else if (player.canSprint)
+        else if (PlayerMovement.canSprint || PlayerMovement.crouching || PlayerMovement.stamina > 395)
         {
             sliderFill.color = new Color(63 / 255f, 131 / 255f, 249 / 255f);
             slider.value = PlayerMovement.stamina;

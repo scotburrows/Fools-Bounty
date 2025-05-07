@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
     public CharacterController characterController;
     float moveSpeed = 10f;
     public static float stamina = 400;
-    public Boolean canSprint = true;
+    public static Boolean canSprint = true;
     public static Boolean crouching = false;
 
     float fallSpeed = -10f;

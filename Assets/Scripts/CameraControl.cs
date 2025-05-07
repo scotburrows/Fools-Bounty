@@ -30,10 +30,10 @@ public class CameraControl : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.LeftControl)) {
             if (PlayerMovement.crouching) {
-                transform.position += new Vector3(0, -0.2f, 0);
+                transform.position += new Vector3(0, 0.2f, 0);
             }
             else {
-                transform.position += new Vector3(0, 0.2f, 0);
+                transform.position += new Vector3(0, -0.2f, 0);
             }
         }
     }
