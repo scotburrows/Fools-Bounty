@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
     Boolean inWater = false;
     int swim = 0;
 
-    Boolean prev_inWater;
+    Boolean prev_inWater = false;
     public AudioClip waterSound;
     AudioSource sound;
     public AudioSource oceanSound;
@@ -26,6 +26,14 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask windVolume;
     public LayerMask forestVolume;
     public AudioSource forestSound;
+    public AudioClip jumpSound;
+    Boolean prev_onGround = false;
+    public AudioClip landingSound;
+    public AudioClip sandSound;
+    public AudioSource walkSound;
+    public AudioClip woodSound;
+    public LayerMask ship;
+    Boolean onWood = false;
 
     public static Boolean haste = false;
     public static float haste_time = 400f;
@@ -60,6 +68,50 @@ public class PlayerMovement : MonoBehaviour
         oceanSound.volume = Math.Clamp(oceanSound.volume, 0f, 0.75f);
         windSound.volume = Math.Clamp(windSound.volume, 0f, 1f);
         forestSound.volume = Math.Clamp(forestSound.volume, 0f, 1f);
+
+        onWood = Physics.CheckSphere(new Vector3(transform.position.x, transform.position.y - 1.5f, transform.position.z), 0.5f, ship);
+        if ((Input.GetAxisRaw("Horizontal") > 0 || Input.GetAxisRaw("Vertical") > 0) && !walkSound.isPlaying)
+        {
+            /*if (moveSpeed < 5f)
+            {
+                walkSound.pitch = 1.5f;
+                walkSound.volume = 1f;
+            }
+            else if (moveSpeed < 10f)
+            {
+                walkSound.pitch = 1f;
+                walkSound.volume = 0f;
+            }
+            else
+            {
+                walkSound.pitch = 1f;
+                walkSound.volume = 1f;
+            }*/
+            walkSound.pitch = moveSpeed / 10f;
+            if (onWood) {
+                walkSound.clip = woodSound;
+                walkSound.Play();
+            }
+            else if (onGround)
+            {
+                walkSound.clip = sandSound;
+                walkSound.Play();
+            }
+        }
+
+        if (onGround && prev_onGround != onGround)
+        {
+            if (onWood)
+            {
+                walkSound.clip = woodSound;
+            }
+            else
+            {
+                walkSound.clip = landingSound;
+            }
+            walkSound.Play();
+        }
+        prev_onGround = onGround;
 
         if (Input.GetKeyDown(KeyCode.F))
         {
@@ -126,8 +178,8 @@ public class PlayerMovement : MonoBehaviour
             }
             if (prev_inWater != inWater)
             {
-                sound.clip = waterSound;
-                sound.Play();
+                walkSound.clip = waterSound;
+                walkSound.Play();
             }
             //characterController.Move(new Vector3(0, (float) Math.Sin(swim++ * 1f), 0) * 0.5f);
         }
@@ -139,10 +191,25 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             characterController.Move(new Vector3(0.001f, 0, 0));
-            if (onGround || inWater)
+            if (onGround)
             {
+                if (onWood)
+                {
+                    walkSound.clip = woodSound;
+                }
+                else
+                {
+                    walkSound.clip = jumpSound;
+                }
+                walkSound.Play();
                 gravity.y = 10f;
                 //characterController.Move(new Vector3(0, 10, 0));
+            }
+            else if (inWater)
+            {
+                walkSound.clip = waterSound;
+                walkSound.Play();
+                gravity.y = 5f;
             }
         }
 
