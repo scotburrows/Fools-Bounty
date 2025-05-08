@@ -186,6 +186,7 @@ public class PlayerMovement : MonoBehaviour
         else {
             fallSpeed = -10f;
         }
+        prev_inWater = inWater;
 
         // Jumping
         if (Input.GetKeyDown(KeyCode.Space))
