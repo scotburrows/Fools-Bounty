@@ -18,18 +18,49 @@ public class PlayerMovement : MonoBehaviour
     Boolean inWater = false;
     int swim = 0;
 
+    Boolean prev_inWater;
+    public AudioClip waterSound;
+    AudioSource sound;
+    public AudioSource oceanSound;
+    public AudioSource windSound;
+    public LayerMask windVolume;
+    public LayerMask forestVolume;
+    public AudioSource forestSound;
+
     public static Boolean haste = false;
     public static float haste_time = 400f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        sound = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Physics.CheckSphere(new Vector3(transform.position.x, transform.position.y, transform.position.z), 1f, forestVolume))
+        {
+            oceanSound.volume -= 0.075f * Time.deltaTime;
+            windSound.volume -= 0.15f * Time.deltaTime;
+            forestSound.volume += 0.15f * Time.deltaTime;
+        }
+        else if (Physics.CheckSphere(new Vector3(transform.position.x, transform.position.y, transform.position.z), 1f, windVolume))
+        {
+            oceanSound.volume -= 0.075f * Time.deltaTime;
+            windSound.volume += 0.1f * Time.deltaTime;
+            forestSound.volume -= 0.1f * Time.deltaTime;
+        }
+        else
+        {
+            oceanSound.volume += 0.075f * Time.deltaTime;
+            windSound.volume -= 0.1f * Time.deltaTime;
+            forestSound.volume -= 0.1f * Time.deltaTime;
+        }
+        oceanSound.volume = Math.Clamp(oceanSound.volume, 0f, 0.75f);
+        windSound.volume = Math.Clamp(windSound.volume, 0f, 1f);
+        forestSound.volume = Math.Clamp(forestSound.volume, 0f, 1f);
+
         if (Input.GetKeyDown(KeyCode.F))
         {
             haste = true;
@@ -92,6 +123,11 @@ public class PlayerMovement : MonoBehaviour
             if (UnityEngine.Random.Range(0f, 2f) >= 1.5f)
             {
                 stamina--;
+            }
+            if (prev_inWater != inWater)
+            {
+                sound.clip = waterSound;
+                sound.Play();
             }
             //characterController.Move(new Vector3(0, (float) Math.Sin(swim++ * 1f), 0) * 0.5f);
         }

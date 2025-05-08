@@ -21,11 +21,20 @@ public class PlayerAbilities : MonoBehaviour
     public static int health = 100;
     public static int coins = 20;
     public ParticleSystem shootParticle;
+    public AudioClip shootSound;
+    AudioSource sound;
+    public AudioClip hasteSound;
+    int prev_health = health;
+    public AudioClip dmgSound;
+    int prev_coins = coins;
+    public AudioClip moneySound;
+    public AudioClip shopSound;
+    public AudioClip pickupSound;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        sound = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -48,6 +57,24 @@ public class PlayerAbilities : MonoBehaviour
             playerSlot = 4;
         }
 
+        if (prev_health > health)
+        {
+            sound.clip = dmgSound;
+            sound.Play();
+        }
+        prev_health = health;
+        if (prev_coins < coins)
+        {
+            sound.clip = moneySound;
+            sound.Play();
+        }
+        else if (prev_coins > coins)
+        {
+            sound.clip = shopSound;
+            sound.Play();
+        }
+        prev_coins = coins;
+
         if (Input.GetMouseButtonDown(0))
         {
             Ray ray = new(camera.transform.position, camera.transform.forward);
@@ -57,6 +84,8 @@ public class PlayerAbilities : MonoBehaviour
             if (playerSlot == 1 && bullets > 0)
             {
                 Destroy(Instantiate(shootParticle.gameObject, camera.transform.position, camera.transform.rotation), 2.0f);
+                sound.clip = shootSound;
+                sound.Play();
                 if (Physics.Raycast(ray, out hit, 25, monster))
                 {
                     target = hit.transform;
@@ -89,6 +118,8 @@ public class PlayerAbilities : MonoBehaviour
                 else
                 {
                     PlayerMovement.haste = true;
+                    sound.clip = hasteSound;
+                    sound.Play();
                     slot2.Translate(new Vector3(0, 100, 0));
                     slot2 = null;
                 }
@@ -111,6 +142,8 @@ public class PlayerAbilities : MonoBehaviour
                 else
                 {
                     PlayerMovement.haste = true;
+                    sound.clip = hasteSound;
+                    sound.Play();
                     slot3.Translate(new Vector3(0, 100, 0));
                     slot3 = null;
                 }
@@ -133,6 +166,8 @@ public class PlayerAbilities : MonoBehaviour
                 else
                 {
                     PlayerMovement.haste = true;
+                    sound.clip = hasteSound;
+                    sound.Play();
                     slot4.Translate(new Vector3(0, 100, 0));
                     slot4 = null;
                 }
@@ -182,6 +217,5 @@ public class PlayerAbilities : MonoBehaviour
                 }
             }
         }
-
     }
 }
