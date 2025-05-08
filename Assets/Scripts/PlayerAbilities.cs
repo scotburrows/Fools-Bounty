@@ -89,13 +89,14 @@ public class PlayerAbilities : MonoBehaviour
                 if (Physics.Raycast(ray, out hit, 25, monster))
                 {
                     target = hit.transform;
-                    if (target.parent)
+                    //Debug.Log(target.GetComponent<Animator>());
+                    if (target.parent.GetComponentInChildren<Animator>())
                     {
                         target.parent.GetComponentInChildren<Animator>().speed = 0.2f;
                     }
                     else
                     {
-                        target.GetComponentInChildren<Animator>().speed = 0.2f;
+                        target.parent.parent.GetComponent<Animator>().speed = 0.2f;
                     }
                 }
                 bullets--;
@@ -107,6 +108,9 @@ public class PlayerAbilities : MonoBehaviour
                     slot2 = hit.transform;
                     slot2.GetComponent<Rigidbody>().useGravity = false;
                     slot2.Translate(new Vector3(0, -100, 0));
+
+                    sound.clip = pickupSound;
+                    sound.Play();
                 }
                 else if (slot2.GetComponent<Rigidbody>())
                 {
@@ -131,6 +135,9 @@ public class PlayerAbilities : MonoBehaviour
                     slot3 = hit.transform;
                     slot3.GetComponent<Rigidbody>().useGravity = false;
                     slot3.Translate(new Vector3(0, -100, 0));
+
+                    sound.clip = pickupSound;
+                    sound.Play();
                 }
                 else if (slot3.GetComponent<Rigidbody>())
                 {
@@ -155,6 +162,9 @@ public class PlayerAbilities : MonoBehaviour
                     slot4 = hit.transform;
                     slot4.GetComponent<Rigidbody>().useGravity = false;
                     slot4.Translate(new Vector3(0, -100, 0));
+
+                    sound.clip = pickupSound;
+                    sound.Play();
                 }
                 else if (slot4.GetComponent<Rigidbody>())
                 {
