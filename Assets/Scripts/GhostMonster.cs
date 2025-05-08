@@ -10,11 +10,14 @@ public class GhostMonster : MonoBehaviour
     public LayerMask targetLayer;
     public Transform target;
     Animator animatorReference;
+    public int range = 60;
+    CharacterController characterController;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         animatorReference = GetComponentInChildren<Animator>();
+        characterController = GetComponentInChildren<CharacterController>();
     }
 
     // Update is called once per frame
@@ -22,17 +25,18 @@ public class GhostMonster : MonoBehaviour
     {
         if (animatorReference.speed == 1)
         {
-            if ((Physics.CheckSphere(transform.position, 15, targetLayer) && !PlayerMovement.crouching) || (PlayerMovement.crouching && Physics.CheckSphere(transform.position, 10, targetLayer))) {
+            if ((Physics.CheckSphere(transform.position, range, targetLayer) && !PlayerMovement.crouching) || (PlayerMovement.crouching && Physics.CheckSphere(transform.position, 10, targetLayer))) {
                 spotted_player = true;
             }
-            else if (!Physics.CheckSphere(transform.position, 25, targetLayer))
+            else if (!Physics.CheckSphere(transform.position, range + 20, targetLayer))
             {
                 spotted_player = false;
             }
 
             if (spotted_player)
             {
-                transform.position = Vector3.MoveTowards(transform.position, target.position, 3 * Time.deltaTime);
+                //transform.position = Vector3.MoveTowards(transform.position, target.position, 6 * Time.deltaTime);
+                characterController.Move((target.transform.position - transform.position).normalized * 6 * Time.deltaTime);
                 //transform.rotation = target.rotation + initial_rotation;
                 transform.rotation = Quaternion.LookRotation(target.position - transform.position);
             }

@@ -15,6 +15,8 @@ public class SkeletonMonster : MonoBehaviour
     float fallSpeed = -10f;
     CharacterController characterController;
     float animatorSpeed = 0f;
+    public int speed = 10;
+    public float speedAnim = 1f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -39,7 +41,7 @@ public class SkeletonMonster : MonoBehaviour
             if (spotted_player)
             {
                 //transform.position = Vector3.MoveTowards(transform.position, new Vector3(target.transform.position.x, transform.position.y, target.transform.position.z), 7 * Time.deltaTime);
-                characterController.Move((target.transform.position - transform.position).normalized * 10 * Time.deltaTime);
+                characterController.Move((target.transform.position - transform.position).normalized * speed * Time.deltaTime);
                 //transform.rotation = target.rotation + initial_rotation;
                 transform.rotation = Quaternion.LookRotation(target.position - transform.position);
                 animatorSpeed += 0.8f * Time.deltaTime;
@@ -53,7 +55,7 @@ public class SkeletonMonster : MonoBehaviour
                 PlayerAbilities.health -= 1;
                 animatorSpeed -= 0.6f * Time.deltaTime;
             }
-            animatorSpeed = Mathf.Clamp(animatorSpeed, 0f, 1f);
+            animatorSpeed = Mathf.Clamp(animatorSpeed, 0f, speedAnim);
             animatorReference.SetFloat("Speed", animatorSpeed);
         }
         else

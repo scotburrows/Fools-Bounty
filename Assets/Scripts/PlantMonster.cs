@@ -12,10 +12,14 @@ public class PlantMonster : MonoBehaviour
     public Transform attack2;
     public Transform target;
     Animator animatorReference;
-    public int attackTimer1 = 0;
-    public int attackTimer2 = 100;
-    public bool setPos = false;
-    public bool atTop = false;
+    int attackTimer1 = 0;
+    int attackTimer2 = 100;
+    bool setPos = false;
+    bool atTop = false;
+    public Transform rotate1;
+    public Transform rotate2;
+    public Transform rotate3;
+    public Transform rotate4;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -38,6 +42,11 @@ public class PlantMonster : MonoBehaviour
 
             if (spotted_player)
             {
+                //rotate1.rotation = Quaternion.Euler(0f, Quaternion.LookRotation(target.position - rotate3.position).y, 0f);
+                //rotate2.rotation = Quaternion.Euler(-90f, 0f, -1 * Quaternion.LookRotation(target.position - rotate3.position).y);
+                //rotate3.rotation = Quaternion.Euler(0f, Quaternion.LookRotation(target.position - rotate3.position).y, 0f);
+                //rotate4.rotation = Quaternion.Euler(0f, Quaternion.LookRotation(target.position - rotate3.position).y, 7f);
+
                 if (attackTimer1 > 0 && attackTimer2 > 0)
                 {
                     attackTimer1--;
