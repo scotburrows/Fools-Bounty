@@ -101,7 +101,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (onGround && prev_onGround != onGround)
         {
-            if (gravity.y > 1f && Physics.CheckSphere(new Vector3(transform.position.x, transform.position.y - 1.5f, transform.position.z), 0.5f, water))
+            if (Physics.CheckSphere(new Vector3(transform.position.x, transform.position.y - 1.5f, transform.position.z), 0.5f, water))
             {
                 walkSound.clip = waterSound;
             }

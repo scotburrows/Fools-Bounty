@@ -7,6 +7,10 @@ public class GameOver : MonoBehaviour
 {
     public Image deathOverlay;
     float color = 1;
+    public float red = 0.78125f;
+    public float blue = 0f;
+    public float green = 0f;
+    public bool doubleClick = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -18,11 +22,18 @@ public class GameOver : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        deathOverlay.color = new Color(0.78125f, 0f, 0f, color);
+        deathOverlay.color = new Color(red, blue, green, color);
         color -= Time.deltaTime;
         if (color <= 0f && Input.GetMouseButtonDown(0))
         {
-            SceneManager.LoadScene("TitleScreen");
+            if (!doubleClick)
+            {
+                SceneManager.LoadScene("TitleScreen");
+            }
+            else
+            {
+                doubleClick = false;
+            }
         }
     }
 }
