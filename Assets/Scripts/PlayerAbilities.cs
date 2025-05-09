@@ -216,9 +216,9 @@ public class PlayerAbilities : MonoBehaviour
             if (Physics.Raycast(ray, out hit, 5, potionShop))
             {
                 target = hit.transform;
-                if (playerSlot <= 2 && coins >= 15)
+                if (playerSlot <= 2)
                 {
-                    if (!slot2)
+                    if (!slot2 && coins >= 15)
                     {
                         slot2 = target.parent.GetComponent<PotionStand>().potion1;
                         slot2.Translate(new Vector3(0, -100, 0));
@@ -227,7 +227,7 @@ public class PlayerAbilities : MonoBehaviour
                 }
                 else if (playerSlot == 3 || (slot2 && playerSlot <= 2))
                 {
-                    if (!slot3)
+                    if (!slot3 && coins >= 15)
                     {
                         slot3 = target.parent.GetComponent<PotionStand>().potion2;
                         slot3.Translate(new Vector3(0, -100, 0));
@@ -236,7 +236,7 @@ public class PlayerAbilities : MonoBehaviour
                 }
                 else
                 {
-                    if (!slot4)
+                    if (!slot4 && coins >= 15)
                     {
                         slot4 = target.parent.GetComponent<PotionStand>().potion3;
                         slot4.Translate(new Vector3(0, -100, 0));
