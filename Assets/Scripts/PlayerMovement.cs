@@ -129,7 +129,7 @@ public class PlayerMovement : MonoBehaviour
             haste_time -= (400 / 12) * Time.deltaTime;
             if (haste_time <= 0) {
                 haste = false;
-                haste_time = 200f;
+                haste_time = 400f;
             }
         }
         // Sprinting & stamina management
