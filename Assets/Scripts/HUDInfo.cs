@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class HUDInfo : MonoBehaviour
@@ -11,6 +12,7 @@ public class HUDInfo : MonoBehaviour
     public Image ammo3;
     public Image reticle1;
     public Image reticle2;
+    public Image deathOverlay;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -60,6 +62,13 @@ public class HUDInfo : MonoBehaviour
         {
             reticle1.color = new Color(1f, 1f, 1f, 0f);
             reticle2.color = new Color(1f, 1f, 1f, 0f);
+        }
+
+        // Death
+        if (PlayerAbilities.health <= 0)
+        {
+            deathOverlay.color = new Color(0.78125f, 0f, 0f, 1f);
+            SceneManager.LoadScene("GameOverScreen");
         }
     }
 }
