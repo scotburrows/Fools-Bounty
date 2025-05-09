@@ -40,6 +40,10 @@ public class PlayerAbilities : MonoBehaviour
     void Start()
     {
         sound = GetComponent<AudioSource>();
+        health = 100;
+        coins = 0;
+        prev_coins = 0;
+        prev_health = 100;
     }
 
     // Update is called once per frame
@@ -203,13 +207,16 @@ public class PlayerAbilities : MonoBehaviour
             }
             if (Physics.Raycast(ray, out hit, 5, ammoShop))
             {
-                bullets += 1;
-                coins -= 10;
+                if (coins >= 10)
+                {
+                    bullets += 1;
+                    coins -= 10;
+                }
             }
             if (Physics.Raycast(ray, out hit, 5, potionShop))
             {
                 target = hit.transform;
-                if (playerSlot <= 2)
+                if (playerSlot <= 2 && coins >= 15)
                 {
                     if (!slot2)
                     {
