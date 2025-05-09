@@ -101,7 +101,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (onGround && prev_onGround != onGround)
         {
-            if (Physics.CheckSphere(new Vector3(transform.position.x, transform.position.y - 1.5f, transform.position.z), 0.5f, water))
+            if (gravity.y > 1f && Physics.CheckSphere(new Vector3(transform.position.x, transform.position.y - 1.5f, transform.position.z), 0.5f, water))
             {
                 walkSound.clip = waterSound;
             }
@@ -164,8 +164,11 @@ public class PlayerMovement : MonoBehaviour
         inWater = Physics.CheckSphere(new Vector3(transform.position.x, transform.position.y, transform.position.z), 0.4f, water);
 
         // Movement with WASD
-        Vector3 movement = (Input.GetAxisRaw("Horizontal") * transform.right) + (Input.GetAxisRaw("Vertical") * transform.forward);
-        characterController.Move(movement * Time.deltaTime * moveSpeed);
+        if (!PlayerAbilities.hasWon)
+        {
+            Vector3 movement = (Input.GetAxisRaw("Horizontal") * transform.right) + (Input.GetAxisRaw("Vertical") * transform.forward);
+            characterController.Move(movement * Time.deltaTime * moveSpeed);
+        }
 
         // Ground check
         if (onGround && gravity.y < 0)
@@ -193,7 +196,7 @@ public class PlayerMovement : MonoBehaviour
         prev_inWater = inWater;
 
         // Jumping
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && !PlayerAbilities.hasWon)
         {
             characterController.Move(new Vector3(0.001f, 0, 0));
             if (onGround)

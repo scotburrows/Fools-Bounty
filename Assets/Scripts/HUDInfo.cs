@@ -13,6 +13,7 @@ public class HUDInfo : MonoBehaviour
     public Image reticle1;
     public Image reticle2;
     public Image deathOverlay;
+    float overlayAlpha;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -69,6 +70,17 @@ public class HUDInfo : MonoBehaviour
         {
             deathOverlay.color = new Color(0.78125f, 0f, 0f, 1f);
             SceneManager.LoadScene("GameOverScreen");
+        }
+
+        // Win
+        if (PlayerAbilities.hasWon)
+        {
+            deathOverlay.color = new Color(1f, 1f, 1f, overlayAlpha);
+            overlayAlpha += 0.25f * Time.deltaTime;
+            if (overlayAlpha >= 1f)
+            {
+                SceneManager.LoadScene("WinScreen");
+            }
         }
     }
 }

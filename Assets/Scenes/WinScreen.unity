@@ -6072,6 +6072,7 @@ MonoBehaviour:
   title2: {fileID: 8300000, guid: aa4f9d2e636830c4da5e52b415ce61d4, type: 3}
   button1: {fileID: 336133114}
   button2: {fileID: 2077604616}
+  startSound: {fileID: 0}
 --- !u!82 &336133117
 AudioSource:
   m_ObjectHideFlags: 0
@@ -26324,7 +26325,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6603522694710932468, guid: a1dcd447bfbb3bc45821f8b436c031d2, type: 3}
       propertyPath: m_Layer
-      value: 15
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6986343243244837483, guid: a1dcd447bfbb3bc45821f8b436c031d2, type: 3}
       propertyPath: m_Layer

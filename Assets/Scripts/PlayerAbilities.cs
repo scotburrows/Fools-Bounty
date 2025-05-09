@@ -31,6 +31,11 @@ public class PlayerAbilities : MonoBehaviour
     public AudioClip shopSound;
     public AudioClip pickupSound;
 
+    public static int treasuresCollected = 0;
+    public static bool hasWon = false;
+    public LayerMask winChecker;
+    public AudioClip winSound;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -190,6 +195,12 @@ public class PlayerAbilities : MonoBehaviour
             RaycastHit hit;
             //Debug.DrawRay(camera.transform.position, camera.transform.forward * 50);
 
+            if (Physics.Raycast(ray, out hit, 5, winChecker) && treasuresCollected >= 10)
+            {
+                hasWon = true;
+                sound.clip = winSound;
+                sound.Play();
+            }
             if (Physics.Raycast(ray, out hit, 5, ammoShop))
             {
                 bullets += 1;

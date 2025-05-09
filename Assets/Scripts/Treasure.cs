@@ -18,6 +18,7 @@ public class Treasure : MonoBehaviour
         {
             Destroy(Instantiate(collected.gameObject, gameObject.transform.position, gameObject.transform.rotation), 2.0f);
             PlayerAbilities.coins += coinAmount;
+            PlayerAbilities.treasuresCollected += 1;
             Destroy(gameObject);
         };
     }

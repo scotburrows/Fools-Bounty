@@ -14,6 +14,7 @@ public class TitleScreen : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
     Sprite inactive;
     Sprite active;
     AudioSource startSound;
+    bool clicked;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -31,7 +32,10 @@ public class TitleScreen : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
     // Update is called once per frame
     void Update()
     {
-        
+        if (clicked && !startSound.isPlaying)
+            {
+                SceneManager.LoadScene("TheWorld");
+            }
     }
 
     //Detect if a click occurs
@@ -40,7 +44,7 @@ public class TitleScreen : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
         //Output to console the clicked GameObject's name and the following message. You can replace this with your own actions for when clicking the GameObject.
         //Debug.Log(name + " Game Object Clicked!");
         startSound.Play();
-        SceneManager.LoadScene("TheWorld");
+        clicked = true;
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -50,7 +54,10 @@ public class TitleScreen : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        button1.sprite = inactive;
+        if (!startSound.isPlaying)
+        {
+            button1.sprite = inactive;
+        }
     }
 
 }
