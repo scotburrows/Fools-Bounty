@@ -19,7 +19,7 @@ public class PlayerAbilities : MonoBehaviour
     public LayerMask potionShop;
 
     public static int health = 100;
-    public static int coins = 20;
+    public static int coins = 0;
     public ParticleSystem shootParticle;
     public AudioClip shootSound;
     AudioSource sound;
